@@ -20,33 +20,45 @@
 <span class="w-2 h-2 bg-error rounded-full animate-pulse"></span>
 <span class="font-label-md text-label-md text-error uppercase">Live • 2nd Innings</span>
 </div>
-<div class="flex items-baseline gap-2">
-<h1 class="font-data-num text-data-num text-on-surface">148/4</h1>
-<span class="font-title-lg text-title-lg text-outline">(16.4)</span>
-</div>
-</div>
-<div class="text-right">
-<p class="font-label-md text-label-md text-outline uppercase tracking-wider">Target: 184</p>
-<div class="mt-1">
-<span class="font-body-sm text-body-sm px-2 py-0.5 bg-tertiary-container text-on-tertiary-container rounded-full">CRR: 8.88</span>
-<span class="font-body-sm text-body-sm px-2 py-0.5 bg-error-container text-on-error-container rounded-full ml-1">RRR: 10.80</span>
-</div>
-</div>
+    <div class="flex items-baseline gap-2">
+      <h1 class="font-data-num text-data-num text-on-surface">{{runs}}/{{wickets}}</h1>
+      <span class="font-title-lg text-title-lg text-outline">({{overs}}.{{ballsInOver}})</span>
+    </div>
+  </div>
+  <div class="text-right">
+    <p class="font-label-md text-label-md text-outline uppercase tracking-wider">Target: 184</p>
+    <div class="mt-1">
+      <span class="font-body-sm text-body-sm px-2 py-0.5 bg-tertiary-container text-on-tertiary-container rounded-full">CRR: {{ (runs / (overs + ballsInOver/6)).toFixed(2) }}</span>
+      <span class="font-body-sm text-body-sm px-2 py-0.5 bg-error-container text-on-error-container rounded-full ml-1">RRR: {{ ((184 - runs) / (20 - (overs + ballsInOver/6))).toFixed(2) }}</span>
+    </div>
+  </div>
 </div>
 </section>
 
-<section class="bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-slate-100 p-4">
-<h3 class="font-title-lg text-title-lg mb-4 text-on-surface">Current Over</h3>
-<div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-<div class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-slate-100 flex items-center justify-center font-bold text-on-surface-variant">0</div>
-<div class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-blue-100 bg-blue-50 flex items-center justify-center font-bold text-primary">1</div>
-<div class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-primary bg-primary flex items-center justify-center font-bold text-on-primary">4</div>
-<div class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-slate-100 flex items-center justify-center font-bold text-on-surface-variant">0</div>
-<div class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-tertiary bg-tertiary flex items-center justify-center font-bold text-on-tertiary">6</div>
-<div class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-error bg-error-container flex items-center justify-center font-black text-error">W</div>
-<div class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-dashed border-slate-200 flex items-center justify-center font-bold text-slate-300">•</div>
-</div>
-</section>
+  <section class="bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-slate-100 p-4">
+    <h3 class="font-title-lg text-title-lg mb-4 text-on-surface">Current Over</h3>
+    <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+      <div *ngFor="let ball of currentOverBalls" 
+           class="flex-shrink-0 w-12 h-12 rounded-full border-2 flex items-center justify-center font-bold"
+           [class.border-slate-100]="ball === '0'"
+           [class.text-on-surface-variant]="ball === '0'"
+           [class.border-blue-100]="ball === '1'"
+           [class.bg-blue-50]="ball === '1'"
+           [class.text-primary]="ball === '1'"
+           [class.border-primary]="ball === '4'"
+           [class.bg-primary]="ball === '4'"
+           [class.text-on-primary]="ball === '4'"
+           [class.border-tertiary]="ball === '6'"
+           [class.bg-tertiary]="ball === '6'"
+           [class.text-on-tertiary]="ball === '6'"
+           [class.border-error]="ball === 'W'"
+           [class.bg-error-container]="ball === 'W'"
+           [class.text-error]="ball === 'W'">
+        {{ball}}
+      </div>
+      <div class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-dashed border-slate-200 flex items-center justify-center font-bold text-slate-300">•</div>
+    </div>
+  </section>
 
 <!-- Time-Travel Slider -->
 <section class="bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-slate-100 p-4">
@@ -66,57 +78,103 @@
 <div class="absolute top-0 right-0 p-2">
 <span class="font-label-md text-label-md bg-primary-container text-on-primary-container px-2 py-0.5 rounded-bl-lg">AI ENGINE</span>
 </div>
-<h3 class="font-title-lg text-title-lg mb-4 text-on-surface flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-sm">psychology</span> Win Probability
-</h3>
-<div class="flex items-center justify-between mb-4">
-<div class="text-center">
-<p class="font-label-md text-label-md text-outline uppercase">Team A</p>
-<p class="font-data-num text-data-num text-primary">62%</p>
-</div>
-<div class="h-12 w-[1px] bg-slate-100"></div>
-<div class="text-center">
-<p class="font-label-md text-label-md text-outline uppercase">Team B</p>
-<p class="font-data-num text-data-num text-on-surface-variant">38%</p>
-</div>
-</div>
-<div class="h-24 w-full flex items-end gap-1">
-<div class="flex-1 bg-primary-container/20 rounded-t-sm h-[40%]"></div>
-<div class="flex-1 bg-primary-container/30 rounded-t-sm h-[45%]"></div>
-<div class="flex-1 bg-primary-container/40 rounded-t-sm h-[50%]"></div>
-<div class="flex-1 bg-primary-container/60 rounded-t-sm h-[70%]"></div>
-<div class="flex-1 bg-primary-container/80 rounded-t-sm h-[65%]"></div>
-<div class="flex-1 bg-primary-container rounded-t-sm h-[80%]"></div>
-<div class="flex-1 bg-primary-container rounded-t-sm h-[85%]"></div>
-</div>
+    <h3 class="font-title-lg text-title-lg mb-4 text-on-surface flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary text-sm">psychology</span> Win Probability
+    </h3>
+    <div class="flex items-center justify-between mb-4">
+      <div class="text-center">
+        <p class="font-label-md text-label-md text-outline uppercase">Team A</p>
+        <p class="font-data-num text-data-num text-primary">{{winPercentage}}%</p>
+      </div>
+      <div class="h-12 w-[1px] bg-slate-100"></div>
+      <div class="text-center">
+        <p class="font-label-md text-label-md text-outline uppercase">Team B</p>
+        <p class="font-data-num text-data-num text-on-surface-variant">{{100 - winPercentage}}%</p>
+      </div>
+    </div>
+    <div class="h-24 w-full flex items-end gap-1">
+      <div class="flex-1 bg-primary-container/20 rounded-t-sm h-[40%]"></div>
+      <div class="flex-1 bg-primary-container/30 rounded-t-sm h-[45%]"></div>
+      <div class="flex-1 bg-primary-container/40 rounded-t-sm h-[50%]"></div>
+      <div class="flex-1 bg-primary-container/60 rounded-t-sm h-[70%]"></div>
+      <div class="flex-1 bg-primary-container/80 rounded-t-sm h-[65%]"></div>
+      <div class="flex-1 bg-primary-container rounded-t-sm h-[80%]"></div>
+      <div class="flex-1 bg-primary-container rounded-t-sm" [style.height.%]="winPercentage"></div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-slate-100 p-4">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="font-title-lg text-title-lg text-on-surface flex items-center gap-2">
+        <span class="material-symbols-outlined text-error text-sm">speed</span> Tension Meter
+      </h3>
+      <button (click)="toggleSimulator()" [class.bg-error]="isSimulating" [class.text-white]="isSimulating" class="text-[10px] font-black border px-3 py-1 rounded-full border-slate-200 uppercase tracking-tighter flex items-center gap-1 transition-all">
+        <span class="w-1.5 h-1.5 rounded-full" [class.bg-error]="!isSimulating" [class.bg-white]="isSimulating" [class.animate-pulse]="isSimulating"></span>
+        {{ isSimulating ? 'Live' : 'Go Live' }}
+      </button>
+    </div>
+    <div class="relative pt-1">
+      <div class="flex mb-2 items-center justify-between">
+        <div>
+          <span class="font-label-md text-label-md py-1 px-2 uppercase rounded-full bg-error-container text-on-error-container">High Stakes</span>
+        </div>
+        <div class="text-right">
+          <span class="font-data-num text-title-lg text-error">{{(tensionLevel/10).toFixed(1)}}/10</span>
+        </div>
+      </div>
+      <div class="overflow-hidden h-4 mb-4 text-xs flex rounded-full bg-slate-100">
+        <div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gradient-to-r from-blue-500 via-orange-500 to-error" [style.width.%]="tensionLevel"></div>
+      </div>
+      <p class="font-body-sm text-body-sm text-outline">Pressure peaking due to rising RRR and recent wicket. TF.js predicts {{ (tensionLevel * 0.17).toFixed(1) }}% volatility in next 2 overs.</p>
+    </div>
+  </div>
 </div>
 
-<div class="bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-slate-100 p-4">
-<h3 class="font-title-lg text-title-lg mb-4 text-on-surface flex items-center gap-2">
-<span class="material-symbols-outlined text-error text-sm">speed</span> Tension Meter
-</h3>
-<div class="relative pt-1">
-<div class="flex mb-2 items-center justify-between">
-<div>
-<span class="font-label-md text-label-md py-1 px-2 uppercase rounded-full bg-error-container text-on-error-container">High Stakes</span>
-</div>
-<div class="text-right">
-<span class="font-data-num text-title-lg text-error">8.4/10</span>
-</div>
-</div>
-<div class="overflow-hidden h-4 mb-4 text-xs flex rounded-full bg-slate-100">
-<div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gradient-to-r from-blue-500 via-orange-500 to-error" style="width:84%"></div>
-</div>
-<p class="font-body-sm text-body-sm text-outline">Pressure peaking due to rising RRR and recent wicket. TF.js predicts 14.2% volatility in next 2 overs.</p>
-</div>
-</div>
-</div>
+<!-- LIVE POLL AGGREGATOR (NEW) -->
+<section class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] border border-outline-variant mb-6">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="font-headline-md text-headline-md text-on-surface">Match Pulse</h2>
+    <div class="flex items-center gap-1 text-primary">
+      <span class="material-symbols-outlined text-[20px]" data-icon="groups">groups</span>
+      <span class="font-label-md text-label-md">{{(voteA + voteB + 14200).toLocaleString()}} Voting</span>
+    </div>
+  </div>
+  
+  <p class="font-label-md text-label-md text-outline uppercase mb-3">WHO WILL WIN?</p>
+  
+  <div class="space-y-4">
+    <!-- Team A -->
+    <div class="relative group p-3 border border-blue-200 rounded-lg overflow-hidden">
+      <div class="absolute inset-0 bg-blue-100/50 z-0 transition-all duration-1000" [style.width.%]="getPercent('A')"></div>
+      <div class="relative z-10 flex justify-between items-center w-full">
+        <div class="flex flex-col">
+          <span class="font-body-md font-bold text-on-surface">India</span>
+          <button (click)="castVote('A')" class="mt-1 text-[10px] bg-primary text-white px-3 py-1 rounded-full uppercase font-black active:scale-90 transition-transform">Vote</button>
+        </div>
+        <span class="font-data-num text-[20px] text-primary">{{getPercent('A')}}%</span>
+      </div>
+    </div>
 
-<section class="bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-slate-100 p-4">
-<div class="flex justify-between items-center mb-6">
-<h3 class="font-title-lg text-title-lg text-on-surface">Active Partnership</h3>
-<span class="font-title-lg text-title-lg text-primary">42 (28)</span>
-</div>
+    <!-- Team B -->
+    <div class="relative group p-3 border border-slate-200 rounded-lg overflow-hidden">
+      <div class="absolute inset-0 bg-slate-100 z-0 transition-all duration-1000" [style.width.%]="getPercent('B')"></div>
+      <div class="relative z-10 flex justify-between items-center w-full">
+        <div class="flex flex-col">
+          <span class="font-body-md font-bold text-on-surface">Australia</span>
+          <button (click)="castVote('B')" class="mt-1 text-[10px] bg-slate-700 text-white px-3 py-1 rounded-full uppercase font-black active:scale-90 transition-transform">Vote</button>
+        </div>
+        <span class="font-data-num text-[20px] text-on-surface-variant">{{getPercent('B')}}%</span>
+      </div>
+    </div>
+  </div>
+  <p class="mt-4 text-center text-outline font-label-md text-label-md italic">Real-time vote aggregation active</p>
+</section>
+
+  <section class="bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-slate-100 p-4">
+    <div class="flex justify-between items-center mb-6">
+      <h3 class="font-title-lg text-title-lg text-on-surface">Active Partnership</h3>
+      <span class="font-title-lg text-title-lg text-primary">{{partnershipRuns}} ({{partnershipBalls}})</span>
+    </div>
 <div class="flex gap-4 items-center">
 <div class="flex-1 flex flex-col items-center">
 <div class="w-16 h-16 rounded-full overflow-hidden mb-2 border-2 border-primary-container">
@@ -143,14 +201,20 @@
 </section>
 
 <section class="rounded-xl p-[1px] bg-gradient-to-br from-tertiary via-primary to-blue-300">
-<div class="bg-white rounded-[11px] p-4">
-<div class="flex items-center gap-2 mb-3">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-<h3 class="font-title-lg text-title-lg text-on-surface">AI Strat-Insight</h3>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-The bowler is likely to attempt a <span class="font-bold text-primary">wide-yorker</span> next. Sharma has a 78% strike rate against this length in the last 10 matches. Recommendation: <span class="font-bold text-tertiary">Step out and target extra cover.</span>
-</p>
+    <div class="bg-white rounded-[11px] p-4">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+          <h3 class="font-title-lg text-title-lg text-on-surface">AI Strat-Insight</h3>
+        </div>
+        <button (click)="speakInsight(aiInsight)" 
+                class="p-2 -mr-2 text-primary hover:bg-blue-50 rounded-full active:scale-90 transition-transform">
+          <span class="material-symbols-outlined">volume_up</span>
+        </button>
+      </div>
+      <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+        {{aiInsight}}
+      </p>
 <div class="mt-4 flex gap-2">
 <button class="flex-1 py-2 bg-primary-fixed text-on-primary-fixed rounded-lg font-label-md text-label-md uppercase active:scale-95 transition-transform">See Analysis</button>
 <button class="flex-1 py-2 border border-outline-variant text-outline rounded-lg font-label-md text-label-md uppercase active:scale-95 transition-transform">Dismiss</button>
