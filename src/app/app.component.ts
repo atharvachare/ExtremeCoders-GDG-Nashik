@@ -39,6 +39,22 @@ export class AppComponent {
 
   tensionLevel: number = 45;
   winPercentage: number = 62;
+  isDarkMode: boolean = false;
+
+  constructor() {
+    this.startSimulator();
+  }
+
+  toggleTheme() {
+    this.isDarkMode = !this.isDarkMode;
+    if (this.isDarkMode) {
+      document.body.classList.add('dark');
+      document.body.style.backgroundColor = '#111827'; // Dark slate-900
+    } else {
+      document.body.classList.remove('dark');
+      document.body.style.backgroundColor = '#f8f9fa';
+    }
+  }
   
   // VISUALIZATION DATA
   matchHistory: any[] = [];
