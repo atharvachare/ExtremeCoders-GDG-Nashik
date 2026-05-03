@@ -23,6 +23,9 @@
             "styles": [
               "src/styles.css"
             ],
+            "assets": [
+              "src/assets"
+            ],
             "scripts": []
           },
           "configurations": {

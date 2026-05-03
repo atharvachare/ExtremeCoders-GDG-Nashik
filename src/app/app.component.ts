@@ -40,9 +40,13 @@ export class AppComponent {
   tensionLevel: number = 45;
   winPercentage: number = 62;
   isDarkMode: boolean = false;
+  isLoading: boolean = true;
 
   constructor() {
     this.startSimulator();
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 3000); // 3 second splash screen
   }
 
   toggleTheme() {
