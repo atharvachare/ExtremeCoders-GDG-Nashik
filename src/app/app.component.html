@@ -1,0 +1,483 @@
+<header class="fixed top-0 w-full z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center w-full px-4 h-16">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-600">analytics</span>
+<span class="text-lg font-black tracking-tighter text-blue-700">CricStat AI Live</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-500">notifications</span>
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold text-xs">JD</div>
+</div>
+</div>
+</header>
+
+<!-- MATCH TAB -->
+<main *ngIf="activeTab === 'match'" class="mt-16 px-4 py-6 space-y-gutter">
+<section class="sticky top-16 z-40 bg-white shadow-sm border-b border-slate-100 -mx-4 px-4 py-4 mb-4">
+<div class="flex justify-between items-start">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="w-2 h-2 bg-error rounded-full animate-pulse"></span>
+<span class="font-label-md text-label-md text-error uppercase">Live • 2nd Innings</span>
+</div>
+<div class="flex items-baseline gap-2">
+<h1 class="font-data-num text-data-num text-on-surface">148/4</h1>
+<span class="font-title-lg text-title-lg text-outline">(16.4)</span>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md text-outline uppercase tracking-wider">Target: 184</p>
+<div class="mt-1">
+<span class="font-body-sm text-body-sm px-2 py-0.5 bg-tertiary-container text-on-tertiary-container rounded-full">CRR: 8.88</span>
+<span class="font-body-sm text-body-sm px-2 py-0.5 bg-error-container text-on-error-container rounded-full ml-1">RRR: 10.80</span>
+</div>
+</div>
+</div>
+</section>
+
+<section class="bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-slate-100 p-4">
+<h3 class="font-title-lg text-title-lg mb-4 text-on-surface">Current Over</h3>
+<div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+<div class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-slate-100 flex items-center justify-center font-bold text-on-surface-variant">0</div>
+<div class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-blue-100 bg-blue-50 flex items-center justify-center font-bold text-primary">1</div>
+<div class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-primary bg-primary flex items-center justify-center font-bold text-on-primary">4</div>
+<div class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-slate-100 flex items-center justify-center font-bold text-on-surface-variant">0</div>
+<div class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-tertiary bg-tertiary flex items-center justify-center font-bold text-on-tertiary">6</div>
+<div class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-error bg-error-container flex items-center justify-center font-black text-error">W</div>
+<div class="flex-shrink-0 w-12 h-12 rounded-full border-2 border-dashed border-slate-200 flex items-center justify-center font-bold text-slate-300">•</div>
+</div>
+</section>
+
+<!-- Time-Travel Slider -->
+<section class="bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-slate-100 p-4">
+<div class="flex justify-between items-center mb-2">
+<h3 class="font-title-lg text-title-lg text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">history</span> Time-Travel Simulator</h3>
+<span class="text-primary font-bold text-sm">Over 16.4</span>
+</div>
+<input type="range" min="1" max="20" value="16.4" step="0.1" class="w-full accent-primary h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" />
+<div class="flex justify-between text-[10px] text-outline mt-2 font-bold uppercase">
+<span>Start</span><span>Over 10</span><span>Live</span>
+</div>
+</section>
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-slate-100 p-4 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2">
+<span class="font-label-md text-label-md bg-primary-container text-on-primary-container px-2 py-0.5 rounded-bl-lg">AI ENGINE</span>
+</div>
+<h3 class="font-title-lg text-title-lg mb-4 text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">psychology</span> Win Probability
+</h3>
+<div class="flex items-center justify-between mb-4">
+<div class="text-center">
+<p class="font-label-md text-label-md text-outline uppercase">Team A</p>
+<p class="font-data-num text-data-num text-primary">62%</p>
+</div>
+<div class="h-12 w-[1px] bg-slate-100"></div>
+<div class="text-center">
+<p class="font-label-md text-label-md text-outline uppercase">Team B</p>
+<p class="font-data-num text-data-num text-on-surface-variant">38%</p>
+</div>
+</div>
+<div class="h-24 w-full flex items-end gap-1">
+<div class="flex-1 bg-primary-container/20 rounded-t-sm h-[40%]"></div>
+<div class="flex-1 bg-primary-container/30 rounded-t-sm h-[45%]"></div>
+<div class="flex-1 bg-primary-container/40 rounded-t-sm h-[50%]"></div>
+<div class="flex-1 bg-primary-container/60 rounded-t-sm h-[70%]"></div>
+<div class="flex-1 bg-primary-container/80 rounded-t-sm h-[65%]"></div>
+<div class="flex-1 bg-primary-container rounded-t-sm h-[80%]"></div>
+<div class="flex-1 bg-primary-container rounded-t-sm h-[85%]"></div>
+</div>
+</div>
+
+<div class="bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-slate-100 p-4">
+<h3 class="font-title-lg text-title-lg mb-4 text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-sm">speed</span> Tension Meter
+</h3>
+<div class="relative pt-1">
+<div class="flex mb-2 items-center justify-between">
+<div>
+<span class="font-label-md text-label-md py-1 px-2 uppercase rounded-full bg-error-container text-on-error-container">High Stakes</span>
+</div>
+<div class="text-right">
+<span class="font-data-num text-title-lg text-error">8.4/10</span>
+</div>
+</div>
+<div class="overflow-hidden h-4 mb-4 text-xs flex rounded-full bg-slate-100">
+<div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gradient-to-r from-blue-500 via-orange-500 to-error" style="width:84%"></div>
+</div>
+<p class="font-body-sm text-body-sm text-outline">Pressure peaking due to rising RRR and recent wicket. TF.js predicts 14.2% volatility in next 2 overs.</p>
+</div>
+</div>
+</div>
+
+<section class="bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-slate-100 p-4">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-title-lg text-title-lg text-on-surface">Active Partnership</h3>
+<span class="font-title-lg text-title-lg text-primary">42 (28)</span>
+</div>
+<div class="flex gap-4 items-center">
+<div class="flex-1 flex flex-col items-center">
+<div class="w-16 h-16 rounded-full overflow-hidden mb-2 border-2 border-primary-container">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5yUqzoFq2oAC8UgAlGwHTDeLw1T0juIVxo4G7yy-iJdU2J9vAzHDM9iP5vOW1d0ZcVA9-66QlFR7jf_Nl95NlKEu2HQ6QbnzreCQTUr34jbZV8zj8_9ZypB_KkNUaRqnCJc6M7bJq-TietZyMT4gj4ydkvsVfVJCh6bgKioiISRx-1rg_9L2cwCNW4JlkiEZxzn8NVr293UohMc5mB8JFJGyTU1B7PIh-dtXrHvG73yELnNvORyoukbwD5RBXoMLzreWej73ErnXn"/>
+</div>
+<span class="font-title-lg text-[14px] text-on-surface font-bold">R. Sharma</span>
+<span class="font-body-sm text-body-sm text-outline">28 (15)</span>
+</div>
+<div class="flex flex-col items-center justify-center gap-1">
+<span class="font-label-md text-[10px] text-outline-variant uppercase">Contribution</span>
+<div class="w-20 h-1 bg-slate-100 rounded-full overflow-hidden flex">
+<div class="w-[66%] bg-primary h-full"></div>
+<div class="w-[34%] bg-blue-200 h-full"></div>
+</div>
+</div>
+<div class="flex-1 flex flex-col items-center opacity-60">
+<div class="w-16 h-16 rounded-full overflow-hidden mb-2 border-2 border-slate-200">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaOJp2hM8qV7af2kekIpPKIcK8GDvkvq6eGkByBQK8yEZ7RrfJHhVgO5iY8r-3kVSBov4e1ygBwbKe2jwibIchx9yi9OvsQasbxWIdCV9_89wDVw-QwwH6T1yaX5R_BEH-g0bM-M7jeyw3N5LgtX1VqWYQwIZwAwRKoqfvs8bjsHvzCTbM_Zh2VqBB_3lcxKNqRjCLKSzDI1rLIHHwhKzczGpR7_13HTKx6aoJkUjm68fBO0RJOe9rnLy1nkUiiWFQbZu7hnG8jVoB"/>
+</div>
+<span class="font-title-lg text-[14px] text-on-surface font-bold">V. Kohli*</span>
+<span class="font-body-sm text-body-sm text-outline">14 (13)</span>
+</div>
+</div>
+</section>
+
+<section class="rounded-xl p-[1px] bg-gradient-to-br from-tertiary via-primary to-blue-300">
+<div class="bg-white rounded-[11px] p-4">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h3 class="font-title-lg text-title-lg text-on-surface">AI Strat-Insight</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+The bowler is likely to attempt a <span class="font-bold text-primary">wide-yorker</span> next. Sharma has a 78% strike rate against this length in the last 10 matches. Recommendation: <span class="font-bold text-tertiary">Step out and target extra cover.</span>
+</p>
+<div class="mt-4 flex gap-2">
+<button class="flex-1 py-2 bg-primary-fixed text-on-primary-fixed rounded-lg font-label-md text-label-md uppercase active:scale-95 transition-transform">See Analysis</button>
+<button class="flex-1 py-2 border border-outline-variant text-outline rounded-lg font-label-md text-label-md uppercase active:scale-95 transition-transform">Dismiss</button>
+</div>
+</div>
+</section>
+</main>
+
+<!-- INSIGHTS TAB -->
+<main *ngIf="activeTab === 'insights'" class="pt-20 pb-24 px-4 max-w-lg mx-auto">
+<section class="mb-gutter">
+<div class="bg-surface-container-low rounded-full p-1 flex items-center shadow-sm">
+<button class="flex-1 py-2 px-4 rounded-full bg-white shadow-sm text-primary font-label-md text-label-md">English</button>
+<button class="flex-1 py-2 px-4 rounded-full text-outline font-label-md text-label-md">Hindi</button>
+<button class="flex-1 py-2 px-4 rounded-full text-outline font-label-md text-label-md">Marathi</button>
+</div>
+</section>
+<div class="flex items-center gap-2 mb-sm px-1 mb-4">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+<span class="font-label-md text-label-md text-tertiary uppercase">Gemini AI Live Analysis</span>
+</div>
+<div class="space-y-6">
+<div class="ai-gradient-border shadow-md overflow-hidden bg-white">
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div class="flex flex-col">
+<span class="text-label-md font-label-md text-outline uppercase tracking-widest">Wicket Analysis</span>
+<h2 class="text-title-lg font-title-lg text-on-surface">The Trap: Virat Kohli Out</h2>
+</div>
+<div class="bg-error-container text-on-error-container px-2 py-1 rounded text-[10px] font-bold">CRITICAL</div>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-4">
+Data indicates a premeditated strategy. The bowler consistently targeted the 4th stump line with a subtle 2mph reduction in pace. Kohli’s strike rate against slow-medium away swingers in the first 10 balls of an innings is currently 42.1%.
+</p>
+<div class="grid grid-cols-2 gap-3 mb-4">
+<div class="bg-surface-container rounded-lg p-3">
+<span class="text-[10px] text-outline block uppercase">Batting Prob</span>
+<span class="text-headline-md font-data-num text-primary">12%</span>
+</div>
+<div class="bg-surface-container rounded-lg p-3">
+<span class="text-[10px] text-outline block uppercase">Swing Dev</span>
+<span class="text-headline-md font-data-num text-tertiary">1.4°</span>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-3 border-t border-outline-variant">
+<span class="material-symbols-outlined text-sm" data-icon="psychology">psychology</span>
+<span class="text-[11px] font-medium text-outline">Smart Tactical Suggestion: Tighten Off-Stump Guard</span>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="trending_up">trending_up</span>
+<span class="text-label-md font-label-md text-outline uppercase tracking-widest">Real-time Momentum</span>
+</div>
+<div class="mb-6">
+<div class="flex justify-between items-end mb-1">
+<span class="text-body-sm font-bold text-on-surface">India</span>
+<span class="text-body-sm font-bold text-on-surface">68%</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden flex">
+<div class="h-full bg-primary" style="width: 68%"></div>
+<div class="h-full bg-slate-300" style="width: 32%"></div>
+</div>
+<div class="flex justify-between items-start mt-1">
+<span class="text-[10px] text-outline uppercase">Target: 184</span>
+<span class="text-[10px] text-outline uppercase">Australia: 32%</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary mt-1" data-icon="info">info</span>
+<p class="text-[12px] leading-relaxed text-on-surface-variant italic">
+"The win probability shifted by +12% following the 14th over. The current run-rate is sufficient, but the projected score has dipped due to rising humidity affecting ball grip."
+</p>
+</div>
+</div>
+
+<!-- Run Rate Dynamics Chart & Wagon Wheel -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+<h3 class="font-title-lg text-title-lg mb-3 text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">show_chart</span> Run Rate Dynamics
+</h3>
+<div class="h-32 w-full flex items-end gap-1 px-2 border-l border-b border-slate-200 relative pb-2">
+<div class="absolute bottom-6 left-0 w-full border-t border-dashed border-error opacity-50"></div>
+<span class="absolute right-0 bottom-7 text-[8px] text-error font-bold">RRR</span>
+<!-- Simulated Bars -->
+<div class="w-full bg-primary/20 h-[30%] rounded-t-sm"></div>
+<div class="w-full bg-primary/40 h-[45%] rounded-t-sm"></div>
+<div class="w-full bg-primary/60 h-[35%] rounded-t-sm"></div>
+<div class="w-full bg-primary/80 h-[60%] rounded-t-sm"></div>
+<div class="w-full bg-primary h-[85%] rounded-t-sm relative"><div class="absolute -top-3 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-tertiary rounded-full shadow-[0_0_8px_rgba(0,107,41,1)]"></div></div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col items-center">
+<h3 class="font-title-lg text-title-lg mb-3 text-on-surface w-full text-left flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">radar</span> Wagon Wheel
+</h3>
+<div class="relative w-28 h-28 rounded-full border-2 border-primary-container bg-primary-fixed/20 flex items-center justify-center">
+<div class="absolute inset-0 m-auto w-1 h-full bg-white/50 rotate-45"></div>
+<div class="absolute inset-0 m-auto w-1 h-full bg-white/50 -rotate-45"></div>
+<div class="w-3 h-3 bg-white rounded-full z-10 border-2 border-primary"></div>
+<!-- Simulated hit lines -->
+<div class="absolute top-1/2 left-1/2 w-10 h-0.5 bg-tertiary origin-left -rotate-[30deg]"></div>
+<div class="absolute top-1/2 left-1/2 w-12 h-1 bg-primary origin-left rotate-[110deg]"></div>
+<div class="absolute top-1/2 left-1/2 w-8 h-0.5 bg-error origin-left rotate-[210deg]"></div>
+</div>
+<span class="text-[10px] text-outline mt-2 font-bold uppercase tracking-wider">Player Impact Zone</span>
+</div>
+</div>
+
+</div>
+</main>
+
+<!-- STUDIO TAB -->
+<main *ngIf="activeTab === 'studio'" class="pt-20 px-4 space-y-6 max-w-lg mx-auto pb-24">
+<section class="space-y-2">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Creator Studio</h2>
+<p class="font-body-sm text-body-sm text-outline">Workspace for IND vs AUS (2nd T20)</p>
+</div>
+<div class="bg-tertiary-container/10 px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary text-[16px]" style="font-variation-settings: 'FILL' 1;">circle</span>
+<span class="text-tertiary font-label-md text-label-md">LIVE</span>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-2 gap-4">
+<div class="col-span-2 ai-gradient-border p-4 rounded-xl shadow-sm space-y-4 bg-white">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-title-lg text-title-lg text-on-surface">AI Momentum Feed</span>
+</div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-full font-label-md text-label-md shadow-lg active:scale-95 transition-transform flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="movie">movie</span>
+One-Click Reel
+</button>
+</div>
+<div class="bg-surface-container rounded-lg p-3">
+<p class="font-body-sm text-body-sm italic text-on-surface-variant leading-relaxed">
+"The last 3 overs saw a 42% spike in boundary probability. Australia's spinners are struggling with the dew. Perfect hook for a 'Turning Point' Reel."
+</p>
+</div>
+</div>
+
+<div class="col-span-2">
+<label class="block text-[10px] font-bold text-outline uppercase tracking-wider mb-2">Select Tone & Language</label>
+<select class="w-full p-3 rounded-lg border border-outline-variant bg-surface-container-low text-on-surface font-body-sm appearance-none outline-none focus:ring-2 ring-primary">
+<option>Analytical (Standard)</option>
+<option>Dramatic (Hype)</option>
+<option>Mumbai Street Style</option>
+<option>Marathi Banter</option>
+</select>
+</div>
+
+<div class="bg-white border border-outline-variant p-4 rounded-xl shadow-sm">
+<span class="font-label-md text-label-md text-outline block mb-1">RUN RATE</span>
+<span class="font-data-num text-data-num text-primary">9.42</span>
+<div class="h-1.5 w-full bg-surface-container mt-2 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4 rounded-full"></div>
+</div>
+</div>
+<div class="bg-white border border-outline-variant p-4 rounded-xl shadow-sm">
+<span class="font-label-md text-label-md text-outline block mb-1">ENGAGEMENT</span>
+<span class="font-data-num text-data-num text-tertiary">14K+</span>
+<div class="h-1.5 w-full bg-surface-container mt-2 rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-1/2 rounded-full"></div>
+</div>
+</div>
+</section>
+<section class="space-y-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline" data-icon="record_voice_over">record_voice_over</span>
+<h3 class="font-title-lg text-title-lg text-on-surface">Instant Voiceover</h3>
+</div>
+<div class="bg-white border border-outline-variant rounded-2xl p-4 shadow-sm space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="audio_file">audio_file</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface">Reel_VO_DeathOvers.mp3</p>
+<p class="font-label-md text-label-md text-outline">Voice: Professional Male</p>
+</div>
+</div>
+<button class="w-10 h-10 border border-primary text-primary rounded-full flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<button class="w-full bg-on-surface text-surface py-3 rounded-xl font-title-lg text-title-lg flex items-center justify-center gap-2 active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined" data-icon="download">download</span> Export MP3 Asset
+</button>
+</div>
+</section>
+</main>
+
+<!-- ORACLE TAB -->
+<main *ngIf="activeTab === 'oracle'" class="flex-grow pt-20 pb-24 px-4 max-w-md mx-auto w-full">
+<section class="mb-gutter bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] border border-outline-variant mb-6">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-headline-md text-headline-md text-on-surface">Next Ball Outcome?</h2>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[20px]" data-icon="groups">groups</span>
+<span class="font-label-md text-label-md">14.2K Voting</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="relative group cursor-pointer active:scale-95 transition-transform duration-150">
+<div class="absolute inset-0 bg-primary/10 rounded-lg w-[42%] z-0"></div>
+<div class="relative z-10 flex justify-between items-center p-3 border border-outline-variant rounded-lg bg-transparent">
+<span class="font-body-md text-body-md font-semibold">Dot Ball</span>
+<span class="font-data-num text-[16px] text-primary">42%</span>
+</div>
+</div>
+<div class="relative group cursor-pointer active:scale-95 transition-transform duration-150">
+<div class="absolute inset-0 bg-primary/10 rounded-lg w-[31%] z-0"></div>
+<div class="relative z-10 flex justify-between items-center p-3 border border-primary rounded-lg bg-transparent">
+<div class="flex items-center gap-2">
+<span class="font-body-md text-body-md font-semibold text-primary">1-3 Runs</span>
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="font-data-num text-[16px] text-primary">31%</span>
+</div>
+</div>
+<div class="relative group cursor-pointer active:scale-95 transition-transform duration-150">
+<div class="absolute inset-0 bg-primary/10 rounded-lg w-[18%] z-0"></div>
+<div class="relative z-10 flex justify-between items-center p-3 border border-outline-variant rounded-lg bg-transparent">
+<span class="font-body-md text-body-md font-semibold">Boundary</span>
+<span class="font-data-num text-[16px] text-primary">18%</span>
+</div>
+</div>
+<div class="relative group cursor-pointer active:scale-95 transition-transform duration-150">
+<div class="absolute inset-0 bg-primary/10 rounded-lg w-[9%] z-0"></div>
+<div class="relative z-10 flex justify-between items-center p-3 border border-outline-variant rounded-lg bg-transparent">
+<span class="font-body-md text-body-md font-semibold text-error">Wicket</span>
+<span class="font-data-num text-[16px] text-error">9%</span>
+</div>
+</div>
+</div>
+<p class="mt-4 text-center text-outline font-label-md text-label-md">Poll closes in 8s</p>
+</section>
+<section class="mb-gutter ai-gradient-border rounded-xl p-6 shadow-lg bg-white">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome">auto_awesome</span>
+<h3 class="font-title-lg text-title-lg font-bold text-primary">Oracle AI Prediction</h3>
+</div>
+<span class="bg-primary-container text-on-primary-container font-label-md text-label-md px-2 py-0.5 rounded-full uppercase">Alpha v2</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+Siraj's last 12 balls to Root have resulted in 8 defensive strokes. Predicted probability for <span class="font-bold text-primary">Dot Ball</span> is <span class="font-bold">68.2%</span>.
+</p>
+<div class="mt-4 flex items-center gap-4">
+<span class="text-outline font-label-md text-label-md">Trusted by 4.2k Pro Analysts</span>
+</div>
+</section>
+
+<!-- Interactive Leaderboard & Social Chatter -->
+<section class="grid grid-cols-1 gap-6">
+<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
+<h3 class="font-title-lg text-title-lg mb-3 flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">emoji_events</span> Leaderboard</h3>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-2 bg-white rounded-lg shadow-sm border border-slate-100">
+<div class="flex items-center gap-2">
+<span class="font-bold text-primary w-4">1</span>
+<div class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold shadow-inner">AK</div>
+<span class="font-body-sm font-semibold">Aryan K.</span>
+</div>
+<div class="flex items-center gap-1 text-orange-500 bg-orange-50 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="text-[10px] font-bold">12 Streak</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-2 bg-white rounded-lg shadow-sm border border-slate-100 opacity-80">
+<div class="flex items-center gap-2">
+<span class="font-bold text-outline w-4">2</span>
+<div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shadow-inner">S</div>
+<span class="font-body-sm font-semibold">Sarah T.</span>
+</div>
+<div class="flex items-center gap-1 text-orange-500 bg-orange-50 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="text-[10px] font-bold">9 Streak</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2"><span class="material-symbols-outlined text-blue-400 opacity-20 text-4xl">forum</span></div>
+<h3 class="font-title-lg text-title-lg mb-3 flex items-center gap-2"><span class="material-symbols-outlined text-blue-500 text-sm">chat</span> Social Chatter</h3>
+<div class="text-sm text-on-surface-variant space-y-3">
+<p class="leading-snug"><span class="font-bold text-blue-600">&#64;cricket_fan:</span> Siraj is breathing fire right now 🔥 The seam position is flawless.</p>
+<div class="w-full h-[1px] bg-slate-100"></div>
+<p class="leading-snug"><span class="font-bold text-blue-600">&#64;stats_nerd:</span> RRR up to 11.2, this is slipping away. They need to target the next over.</p>
+</div>
+</div>
+</section>
+
+</main>
+
+<nav class="fixed bottom-0 w-full z-50 border-t border-slate-200 rounded-t-xl bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+<div class="flex justify-around items-center w-full px-2 py-3 h-20">
+<a (click)="setTab('match')" [ngClass]="activeTab === 'match' ? 'bg-blue-50 text-blue-700 rounded-2xl' : 'text-slate-500 hover:bg-slate-50'" class="flex flex-col items-center justify-center px-4 py-1 active:scale-90 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" [style.font-variation-settings]="activeTab === 'match' ? '\'FILL\' 1' : '\'FILL\' 0'">sports_cricket</span>
+<span class="text-[11px] font-medium uppercase tracking-wider mt-1">Match</span>
+</a>
+<a (click)="setTab('insights')" [ngClass]="activeTab === 'insights' ? 'bg-blue-50 text-blue-700 rounded-2xl' : 'text-slate-500 hover:bg-slate-50'" class="flex flex-col items-center justify-center px-4 py-1 active:scale-90 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" [style.font-variation-settings]="activeTab === 'insights' ? '\'FILL\' 1' : '\'FILL\' 0'">psychology</span>
+<span class="text-[11px] font-medium uppercase tracking-wider mt-1">Insights</span>
+</a>
+<a (click)="setTab('studio')" [ngClass]="activeTab === 'studio' ? 'bg-blue-50 text-blue-700 rounded-2xl' : 'text-slate-500 hover:bg-slate-50'" class="flex flex-col items-center justify-center px-4 py-1 active:scale-90 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" [style.font-variation-settings]="activeTab === 'studio' ? '\'FILL\' 1' : '\'FILL\' 0'">video_settings</span>
+<span class="text-[11px] font-medium uppercase tracking-wider mt-1">Studio</span>
+</a>
+<a (click)="setTab('oracle')" [ngClass]="activeTab === 'oracle' ? 'bg-blue-50 text-blue-700 rounded-2xl' : 'text-slate-500 hover:bg-slate-50'" class="flex flex-col items-center justify-center px-4 py-1 active:scale-90 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" [style.font-variation-settings]="activeTab === 'oracle' ? '\'FILL\' 1' : '\'FILL\' 0'">groups</span>
+<span class="text-[11px] font-medium uppercase tracking-wider mt-1">Oracle</span>
+</a>
+</div>
+</nav>
+
+<button *ngIf="activeTab === 'match' || activeTab === 'insights'" class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</button>

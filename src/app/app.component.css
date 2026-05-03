@@ -1,0 +1,7 @@
+.ai-gradient-border {
+    border: 2px solid transparent;
+    background-image: linear-gradient(#ffffff, #ffffff), linear-gradient(to right, #008735, #1a73e8);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    border-radius: 1rem;
+}
