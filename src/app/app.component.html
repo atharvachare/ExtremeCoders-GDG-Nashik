@@ -222,115 +222,156 @@
 </div>
 </section>
 </main>
-
 <!-- INSIGHTS TAB -->
 <main *ngIf="activeTab === 'insights'" class="pt-20 pb-24 px-4 max-w-lg mx-auto">
-<section class="mb-gutter">
-<div class="bg-surface-container-low rounded-full p-1 flex items-center shadow-sm">
-<button class="flex-1 py-2 px-4 rounded-full bg-white shadow-sm text-primary font-label-md text-label-md">English</button>
-<button class="flex-1 py-2 px-4 rounded-full text-outline font-label-md text-label-md">Hindi</button>
-<button class="flex-1 py-2 px-4 rounded-full text-outline font-label-md text-label-md">Marathi</button>
-</div>
-</section>
-<div class="flex items-center gap-2 mb-sm px-1 mb-4">
-<span class="relative flex h-2 w-2">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
-</span>
-<span class="font-label-md text-label-md text-tertiary uppercase">Gemini AI Live Analysis</span>
-</div>
-<div class="space-y-6">
-<div class="ai-gradient-border shadow-md overflow-hidden bg-white">
-<div class="p-4">
-<div class="flex justify-between items-start mb-2">
-<div class="flex flex-col">
-<span class="text-label-md font-label-md text-outline uppercase tracking-widest">Wicket Analysis</span>
-<h2 class="text-title-lg font-title-lg text-on-surface">The Trap: Virat Kohli Out</h2>
-</div>
-<div class="bg-error-container text-on-error-container px-2 py-1 rounded text-[10px] font-bold">CRITICAL</div>
-</div>
-<p class="text-body-sm font-body-sm text-on-surface-variant mb-4">
-Data indicates a premeditated strategy. The bowler consistently targeted the 4th stump line with a subtle 2mph reduction in pace. Kohli’s strike rate against slow-medium away swingers in the first 10 balls of an innings is currently 42.1%.
-</p>
-<div class="grid grid-cols-2 gap-3 mb-4">
-<div class="bg-surface-container rounded-lg p-3">
-<span class="text-[10px] text-outline block uppercase">Batting Prob</span>
-<span class="text-headline-md font-data-num text-primary">12%</span>
-</div>
-<div class="bg-surface-container rounded-lg p-3">
-<span class="text-[10px] text-outline block uppercase">Swing Dev</span>
-<span class="text-headline-md font-data-num text-tertiary">1.4°</span>
-</div>
-</div>
-<div class="flex items-center gap-2 pt-3 border-t border-outline-variant">
-<span class="material-symbols-outlined text-sm" data-icon="psychology">psychology</span>
-<span class="text-[11px] font-medium text-outline">Smart Tactical Suggestion: Tighten Off-Stump Guard</span>
-</div>
-</div>
-</div>
-<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
-<div class="flex items-center gap-2 mb-4">
-<span class="material-symbols-outlined text-primary" data-icon="trending_up">trending_up</span>
-<span class="text-label-md font-label-md text-outline uppercase tracking-widest">Real-time Momentum</span>
-</div>
-<div class="mb-6">
-<div class="flex justify-between items-end mb-1">
-<span class="text-body-sm font-bold text-on-surface">India</span>
-<span class="text-body-sm font-bold text-on-surface">68%</span>
-</div>
-<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden flex">
-<div class="h-full bg-primary" style="width: 68%"></div>
-<div class="h-full bg-slate-300" style="width: 32%"></div>
-</div>
-<div class="flex justify-between items-start mt-1">
-<span class="text-[10px] text-outline uppercase">Target: 184</span>
-<span class="text-[10px] text-outline uppercase">Australia: 32%</span>
-</div>
-</div>
-<div class="bg-surface-container-low p-3 rounded-lg flex items-start gap-3">
-<span class="material-symbols-outlined text-tertiary mt-1" data-icon="info">info</span>
-<p class="text-[12px] leading-relaxed text-on-surface-variant italic">
-"The win probability shifted by +12% following the 14th over. The current run-rate is sufficient, but the projected score has dipped due to rising humidity affecting ball grip."
-</p>
-</div>
-</div>
+  <!-- TIME TRAVEL SLIDER -->
+  <section *ngIf="matchHistory.length > 0" class="mb-6 bg-surface-container-low p-4 rounded-2xl border border-outline-variant shadow-sm">
+    <div class="flex justify-between items-center mb-2">
+      <span class="text-[10px] font-bold text-outline uppercase tracking-widest flex items-center gap-1">
+        <span class="material-symbols-outlined text-[14px]">history</span> Time-Travel Slider
+      </span>
+      <span class="text-[10px] font-bold text-primary">{{currentTimeTravelIndex === -1 ? 'LIVE' : 'OVER ' + matchHistory[currentTimeTravelIndex].overs}}</span>
+    </div>
+    <input type="range" min="0" [max]="matchHistory.length - 1" [value]="currentTimeTravelIndex === -1 ? matchHistory.length - 1 : currentTimeTravelIndex" 
+           (input)="scrubHistory($event)"
+           class="w-full h-2 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-primary">
+    <p class="text-[10px] text-center text-outline mt-1">Scrub to view historical AI predictions</p>
+  </section>
 
-<!-- Run Rate Dynamics Chart & Wagon Wheel -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
-<h3 class="font-title-lg text-title-lg mb-3 text-on-surface flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-sm">show_chart</span> Run Rate Dynamics
-</h3>
-<div class="h-32 w-full flex items-end gap-1 px-2 border-l border-b border-slate-200 relative pb-2">
-<div class="absolute bottom-6 left-0 w-full border-t border-dashed border-error opacity-50"></div>
-<span class="absolute right-0 bottom-7 text-[8px] text-error font-bold">RRR</span>
-<!-- Simulated Bars -->
-<div class="w-full bg-primary/20 h-[30%] rounded-t-sm"></div>
-<div class="w-full bg-primary/40 h-[45%] rounded-t-sm"></div>
-<div class="w-full bg-primary/60 h-[35%] rounded-t-sm"></div>
-<div class="w-full bg-primary/80 h-[60%] rounded-t-sm"></div>
-<div class="w-full bg-primary h-[85%] rounded-t-sm relative"><div class="absolute -top-3 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-tertiary rounded-full shadow-[0_0_8px_rgba(0,107,41,1)]"></div></div>
-</div>
-</div>
-<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-col items-center">
-<h3 class="font-title-lg text-title-lg mb-3 text-on-surface w-full text-left flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-sm">radar</span> Wagon Wheel
-</h3>
-<div class="relative w-28 h-28 rounded-full border-2 border-primary-container bg-primary-fixed/20 flex items-center justify-center">
-<div class="absolute inset-0 m-auto w-1 h-full bg-white/50 rotate-45"></div>
-<div class="absolute inset-0 m-auto w-1 h-full bg-white/50 -rotate-45"></div>
-<div class="w-3 h-3 bg-white rounded-full z-10 border-2 border-primary"></div>
-<!-- Simulated hit lines -->
-<div class="absolute top-1/2 left-1/2 w-10 h-0.5 bg-tertiary origin-left -rotate-[30deg]"></div>
-<div class="absolute top-1/2 left-1/2 w-12 h-1 bg-primary origin-left rotate-[110deg]"></div>
-<div class="absolute top-1/2 left-1/2 w-8 h-0.5 bg-error origin-left rotate-[210deg]"></div>
-</div>
-<span class="text-[10px] text-outline mt-2 font-bold uppercase tracking-wider">Player Impact Zone</span>
-</div>
-</div>
+  <div class="flex items-center gap-2 mb-sm px-1 mb-4">
+    <span class="relative flex h-2 w-2">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+    </span>
+    <span class="font-label-md text-label-md text-tertiary uppercase">Deep AI Analysis</span>
+  </div>
 
-</div>
+  <div class="space-y-6">
+    <!-- TACTICAL INSIGHTS -->
+    <div class="ai-gradient-border shadow-md overflow-hidden bg-white">
+      <div class="p-4">
+        <div class="flex justify-between items-start mb-2">
+          <div class="flex flex-col">
+            <span class="text-label-md font-label-md text-outline uppercase tracking-widest">Tactical Strategy</span>
+            <h2 class="text-title-lg font-title-lg text-on-surface">Gemini Insights</h2>
+          </div>
+          <div [class.bg-error-container]="tensionLevel > 70" [class.text-error]="tensionLevel > 70" class="px-2 py-1 rounded text-[10px] font-bold">
+            {{ tensionLevel > 70 ? 'CRITICAL' : 'STABLE' }}
+          </div>
+        </div>
+        <p class="text-body-sm font-body-sm text-on-surface-variant mb-4">
+          {{aiInsight}}
+        </p>
+        <div (click)="speakInsight(aiInsight)" class="flex items-center gap-2 pt-3 border-t border-outline-variant cursor-pointer active:opacity-50">
+          <span class="material-symbols-outlined text-sm" data-icon="psychology">volume_up</span>
+          <span class="text-[11px] font-medium text-outline">Hear AI Commentary</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RUN RATE DYNAMICS CHART (SVG) -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4">
+      <div class="flex justify-between items-center mb-4">
+        <span class="text-label-md font-label-md text-outline uppercase tracking-widest">Run Rate Dynamics</span>
+        <div class="flex gap-3">
+          <span class="flex items-center gap-1 text-[10px] text-primary"><span class="w-2 h-2 rounded-full bg-primary"></span> CRR</span>
+          <span class="flex items-center gap-1 text-[10px] text-error"><span class="w-2 h-2 rounded-full bg-error"></span> RRR</span>
+        </div>
+      </div>
+      <div class="h-32 w-full relative">
+        <svg class="w-full h-full" viewBox="0 0 100 40" preserveAspectRatio="none">
+          <!-- CRR Path -->
+          <polyline fill="none" stroke="#005ac1" stroke-width="1.5" stroke-linecap="round"
+                    [attr.points]="'0,30 10,25 20,28 30,22 40,24 50,20 60,18 70,22 80,15 90,10 100,' + (40 - runRate*3)" />
+          <!-- RRR Path -->
+          <polyline fill="none" stroke="#ba1a1a" stroke-width="1" stroke-dasharray="2"
+                    points="0,15 20,18 40,22 60,25 80,28 100,32" />
+        </svg>
+      </div>
+      <div class="flex justify-between mt-2 text-[8px] text-outline uppercase font-bold">
+        <span>Start</span>
+        <span>Current Over</span>
+      </div>
+    </div>
+
+    <!-- WAGON WHEEL & IMPACT -->
+    <div class="grid grid-cols-2 gap-4">
+      <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-4 flex flex-col items-center">
+        <span class="text-[10px] font-bold text-outline uppercase mb-3 w-full">Wagon Wheel</span>
+        <div class="relative w-32 h-32 rounded-full border-4 border-emerald-800 bg-gradient-to-br from-emerald-500 to-emerald-700 overflow-hidden shadow-inner">
+          <!-- Field Markers -->
+          <div class="absolute inset-0 m-auto w-[2px] h-full bg-white/20"></div>
+          <div class="absolute inset-0 m-auto w-full h-[2px] bg-white/20"></div>
+          <!-- Pitch Area -->
+          <div class="absolute inset-0 m-auto w-4 h-12 bg-orange-100/40 rounded-sm border border-white/20 rotate-0"></div>
+          <div class="absolute inset-0 m-auto w-6 h-6 rounded-full border-2 border-white/30 bg-transparent"></div>
+          
+          <!-- Side Labels -->
+          <span class="absolute top-1 left-1/2 -translate-x-1/2 text-[6px] font-bold text-white/50 uppercase">Off</span>
+          <span class="absolute bottom-1 left-1/2 -translate-x-1/2 text-[6px] font-bold text-white/50 uppercase">Leg</span>
+
+          <!-- Hits -->
+          <div *ngFor="let hit of wagonHits" 
+               class="absolute w-2 h-2 rounded-full border border-white shadow-[0_0_8px_rgba(255,255,255,0.8)] animate-pulse"
+               [ngClass]="hit.type === '6' ? 'bg-yellow-400' : 'bg-blue-400'"
+               [style.left.%]="hit.x" [style.top.%]="hit.y">
+          </div>
+        </div>
+        <div class="flex gap-4 mt-3">
+          <span class="flex items-center gap-1 text-[8px] font-bold text-outline"><span class="w-2 h-2 rounded-full bg-blue-400"></span> 4s</span>
+          <span class="flex items-center gap-1 text-[8px] font-bold text-outline"><span class="w-2 h-2 rounded-full bg-yellow-400"></span> 6s</span>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 flex flex-col justify-between">
+        <span class="text-[10px] font-bold text-outline uppercase mb-2">Player Impact</span>
+        <div class="space-y-3">
+          <div>
+            <div class="flex justify-between text-[10px] mb-1">
+              <span>Strike Rate</span>
+              <span class="font-bold">{{(runRate * 15 + 100).toFixed(0)}}</span>
+            </div>
+            <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+              <div class="h-full bg-primary transition-all duration-500" [style.width.%]="runRate * 10"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-[10px] mb-1">
+              <span>Impact Score</span>
+              <span class="font-bold text-tertiary">{{getImpactScore()}}</span>
+            </div>
+            <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+              <div class="h-full bg-tertiary transition-all duration-500" [style.width.%]="getImpactScore()"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WIN PROB MOMENTUM -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="material-symbols-outlined text-primary" data-icon="trending_up">trending_up</span>
+        <span class="text-label-md font-label-md text-outline uppercase tracking-widest">Real-time Momentum</span>
+      </div>
+      <div class="mb-6">
+        <div class="flex justify-between items-end mb-1">
+          <span class="text-body-sm font-bold text-on-surface">India</span>
+          <span class="text-body-sm font-bold text-on-surface">{{winPercentage}}%</span>
+        </div>
+        <div class="w-full h-3 bg-surface-container rounded-full overflow-hidden flex">
+          <div class="h-full bg-primary transition-all duration-1000" [style.width.%]="winPercentage"></div>
+          <div class="h-full bg-slate-300 transition-all duration-1000" [style.width.%]="100 - winPercentage"></div>
+        </div>
+        <div class="flex justify-between items-start mt-1">
+          <span class="text-[10px] text-outline uppercase">Target: 184</span>
+          <span class="text-[10px] text-outline uppercase">Australia: {{100 - winPercentage}}%</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
+/main>
 
 <!-- STUDIO TAB -->
 <main *ngIf="activeTab === 'studio'" class="pt-20 px-4 space-y-6 max-w-lg mx-auto pb-24">
@@ -347,48 +388,48 @@ Data indicates a premeditated strategy. The bowler consistently targeted the 4th
 </div>
 </section>
 <section class="grid grid-cols-2 gap-4">
-<div class="col-span-2 ai-gradient-border p-4 rounded-xl shadow-sm space-y-4 bg-white">
-<div class="flex justify-between items-center">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary" data-icon="auto_awesome">auto_awesome</span>
-<span class="font-title-lg text-title-lg text-on-surface">AI Momentum Feed</span>
-</div>
-<button class="bg-primary text-on-primary px-4 py-2 rounded-full font-label-md text-label-md shadow-lg active:scale-95 transition-transform flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px]" data-icon="movie">movie</span>
-One-Click Reel
-</button>
-</div>
-<div class="bg-surface-container rounded-lg p-3">
-<p class="font-body-sm text-body-sm italic text-on-surface-variant leading-relaxed">
-"The last 3 overs saw a 42% spike in boundary probability. Australia's spinners are struggling with the dew. Perfect hook for a 'Turning Point' Reel."
-</p>
-</div>
-</div>
+    <div class="col-span-2 ai-gradient-border p-4 rounded-xl shadow-sm space-y-4 bg-white">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary" data-icon="auto_awesome">auto_awesome</span>
+          <span class="font-title-lg text-title-lg text-on-surface">AI Momentum Feed</span>
+        </div>
+        <button class="bg-primary text-on-primary px-4 py-2 rounded-full font-label-md text-label-md shadow-lg active:scale-95 transition-transform flex items-center gap-2">
+          <span class="material-symbols-outlined text-[18px]" data-icon="movie">movie</span>
+          One-Click Reel
+        </button>
+      </div>
+      <div class="bg-surface-container rounded-lg p-3">
+        <p class="font-body-sm text-body-sm italic text-on-surface-variant leading-relaxed">
+          "{{studioInsight}}"
+        </p>
+      </div>
+    </div>
 
-<div class="col-span-2">
-<label class="block text-[10px] font-bold text-outline uppercase tracking-wider mb-2">Select Tone & Language</label>
-<select class="w-full p-3 rounded-lg border border-outline-variant bg-surface-container-low text-on-surface font-body-sm appearance-none outline-none focus:ring-2 ring-primary">
-<option>Analytical (Standard)</option>
-<option>Dramatic (Hype)</option>
-<option>Mumbai Street Style</option>
-<option>Marathi Banter</option>
-</select>
-</div>
+    <div class="col-span-2">
+      <label class="block text-[10px] font-bold text-outline uppercase tracking-wider mb-2">Select Tone & Language</label>
+      <select class="w-full p-3 rounded-lg border border-outline-variant bg-surface-container-low text-on-surface font-body-sm appearance-none outline-none focus:ring-2 ring-primary">
+        <option>Analytical (Standard)</option>
+        <option>Dramatic (Hype)</option>
+        <option>Mumbai Street Style</option>
+        <option>Marathi Banter</option>
+      </select>
+    </div>
 
-<div class="bg-white border border-outline-variant p-4 rounded-xl shadow-sm">
-<span class="font-label-md text-label-md text-outline block mb-1">RUN RATE</span>
-<span class="font-data-num text-data-num text-primary">9.42</span>
-<div class="h-1.5 w-full bg-surface-container mt-2 rounded-full overflow-hidden">
-<div class="h-full bg-primary w-3/4 rounded-full"></div>
-</div>
-</div>
-<div class="bg-white border border-outline-variant p-4 rounded-xl shadow-sm">
-<span class="font-label-md text-label-md text-outline block mb-1">ENGAGEMENT</span>
-<span class="font-data-num text-data-num text-tertiary">14K+</span>
-<div class="h-1.5 w-full bg-surface-container mt-2 rounded-full overflow-hidden">
-<div class="h-full bg-tertiary w-1/2 rounded-full"></div>
-</div>
-</div>
+    <div class="bg-white border border-outline-variant p-4 rounded-xl shadow-sm">
+      <span class="font-label-md text-label-md text-outline block mb-1">RUN RATE</span>
+      <span class="font-data-num text-data-num text-primary">{{runRate}}</span>
+      <div class="h-1.5 w-full bg-surface-container mt-2 rounded-full overflow-hidden">
+        <div class="h-full bg-primary transition-all duration-500" [style.width.%]="runRate * 10"></div>
+      </div>
+    </div>
+    <div class="bg-white border border-outline-variant p-4 rounded-xl shadow-sm">
+      <span class="font-label-md text-label-md text-outline block mb-1">ENGAGEMENT</span>
+      <span class="font-data-num text-data-num text-tertiary">{{(14000 + runs).toLocaleString()}}</span>
+      <div class="h-1.5 w-full bg-surface-container mt-2 rounded-full overflow-hidden">
+        <div class="h-full bg-tertiary w-1/2 rounded-full"></div>
+      </div>
+    </div>
 </section>
 <section class="space-y-3">
 <div class="flex items-center gap-2">
@@ -427,39 +468,39 @@ One-Click Reel
 <span class="font-label-md text-label-md">14.2K Voting</span>
 </div>
 </div>
-<div class="space-y-3">
-<div class="relative group cursor-pointer active:scale-95 transition-transform duration-150">
-<div class="absolute inset-0 bg-primary/10 rounded-lg w-[42%] z-0"></div>
-<div class="relative z-10 flex justify-between items-center p-3 border border-outline-variant rounded-lg bg-transparent">
-<span class="font-body-md text-body-md font-semibold">Dot Ball</span>
-<span class="font-data-num text-[16px] text-primary">42%</span>
-</div>
-</div>
-<div class="relative group cursor-pointer active:scale-95 transition-transform duration-150">
-<div class="absolute inset-0 bg-primary/10 rounded-lg w-[31%] z-0"></div>
-<div class="relative z-10 flex justify-between items-center p-3 border border-primary rounded-lg bg-transparent">
-<div class="flex items-center gap-2">
-<span class="font-body-md text-body-md font-semibold text-primary">1-3 Runs</span>
-<span class="material-symbols-outlined text-[18px] text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-</div>
-<span class="font-data-num text-[16px] text-primary">31%</span>
-</div>
-</div>
-<div class="relative group cursor-pointer active:scale-95 transition-transform duration-150">
-<div class="absolute inset-0 bg-primary/10 rounded-lg w-[18%] z-0"></div>
-<div class="relative z-10 flex justify-between items-center p-3 border border-outline-variant rounded-lg bg-transparent">
-<span class="font-body-md text-body-md font-semibold">Boundary</span>
-<span class="font-data-num text-[16px] text-primary">18%</span>
-</div>
-</div>
-<div class="relative group cursor-pointer active:scale-95 transition-transform duration-150">
-<div class="absolute inset-0 bg-primary/10 rounded-lg w-[9%] z-0"></div>
-<div class="relative z-10 flex justify-between items-center p-3 border border-outline-variant rounded-lg bg-transparent">
-<span class="font-body-md text-body-md font-semibold text-error">Wicket</span>
-<span class="font-data-num text-[16px] text-error">9%</span>
-</div>
-</div>
-</div>
+    <div class="space-y-3">
+      <div class="relative group cursor-pointer active:scale-95 transition-transform duration-150">
+        <div class="absolute inset-0 bg-primary/10 rounded-lg z-0" [style.width.%]="oracleProbDot"></div>
+        <div class="relative z-10 flex justify-between items-center p-3 border border-outline-variant rounded-lg bg-transparent">
+          <span class="font-body-md text-body-md font-semibold">Dot Ball</span>
+          <span class="font-data-num text-[16px] text-primary">{{oracleProbDot.toFixed(0)}}%</span>
+        </div>
+      </div>
+      <div class="relative group cursor-pointer active:scale-95 transition-transform duration-150">
+        <div class="absolute inset-0 bg-primary/10 rounded-lg z-0" [style.width.%]="oracleProbRuns"></div>
+        <div class="relative z-10 flex justify-between items-center p-3 border border-primary rounded-lg bg-transparent">
+          <div class="flex items-center gap-2">
+            <span class="font-body-md text-body-md font-semibold text-primary">1-3 Runs</span>
+            <span class="material-symbols-outlined text-[18px] text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+          </div>
+          <span class="font-data-num text-[16px] text-primary">{{oracleProbRuns.toFixed(0)}}%</span>
+        </div>
+      </div>
+      <div class="relative group cursor-pointer active:scale-95 transition-transform duration-150">
+        <div class="absolute inset-0 bg-primary/10 rounded-lg z-0" [style.width.%]="oracleProbBoundary"></div>
+        <div class="relative z-10 flex justify-between items-center p-3 border border-outline-variant rounded-lg bg-transparent">
+          <span class="font-body-md text-body-md font-semibold">Boundary</span>
+          <span class="font-data-num text-[16px] text-primary">{{oracleProbBoundary.toFixed(0)}}%</span>
+        </div>
+      </div>
+      <div class="relative group cursor-pointer active:scale-95 transition-transform duration-150">
+        <div class="absolute inset-0 bg-primary/10 rounded-lg z-0" [style.width.%]="oracleProbWicket"></div>
+        <div class="relative z-10 flex justify-between items-center p-3 border border-outline-variant rounded-lg bg-transparent">
+          <span class="font-body-md text-body-md font-semibold text-error">Wicket</span>
+          <span class="font-data-num text-[16px] text-error">{{oracleProbWicket.toFixed(0)}}%</span>
+        </div>
+      </div>
+    </div>
 <p class="mt-4 text-center text-outline font-label-md text-label-md">Poll closes in 8s</p>
 </section>
 <section class="mb-gutter ai-gradient-border rounded-xl p-6 shadow-lg bg-white">
