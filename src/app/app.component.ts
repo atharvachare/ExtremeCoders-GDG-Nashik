@@ -20,6 +20,23 @@ export class AppComponent {
   oracleProbRuns: number = 31;
   oracleAIInsight: string = "Analyzing past ball patterns to predict next outcome...";
   socialChatter: string = "@cricket_fan: The match is heating up! 🔥";
+  
+  // DYNAMIC ORACLE
+  oracleQuestion: string = "Next Ball Outcome?";
+  oracleOptions: any[] = [
+    { id: 'dot', label: 'Dot Ball', prob: 42 },
+    { id: 'runs', label: '1-3 Runs', prob: 31 },
+    { id: 'boundary', label: 'Boundary', prob: 18 },
+    { id: 'wicket', label: 'Wicket', prob: 9 }
+  ];
+  userVote: string | null = null;
+
+  leaderboardUsers: any[] = [
+    { name: 'Aryan K.', initials: 'AK', points: 1240, streak: 12, color: 'bg-blue-100 text-blue-700' },
+    { name: 'Sarah T.', initials: 'S', points: 1180, streak: 9, color: 'bg-emerald-100 text-emerald-700' },
+    { name: 'Rahul M.', initials: 'RM', points: 950, streak: 4, color: 'bg-orange-100 text-orange-700' }
+  ];
+
   tensionLevel: number = 45;
   winPercentage: number = 62;
   
@@ -170,6 +187,11 @@ export class AppComponent {
       this.oracleProbDot = 100 - this.oracleProbWicket - this.oracleProbBoundary - 30;
       this.oracleProbRuns = 30;
 
+      this.oracleOptions[0].prob = this.oracleProbDot;
+      this.oracleOptions[1].prob = this.oracleProbRuns;
+      this.oracleOptions[2].prob = this.oracleProbBoundary;
+      this.oracleOptions[3].prob = this.oracleProbWicket;
+
       // Run Rate
       const totalBalls = (this.overs * 6) + this.ballsInOver;
       this.runRate = totalBalls > 0 ? Number((this.runs / (totalBalls / 6)).toFixed(2)) : 0;
@@ -178,7 +200,29 @@ export class AppComponent {
     }, 3000);
   }
 
+  submitVote(id: string) {
+    this.userVote = id;
+    // Simulate other people voting
+    this.voteA += Math.floor(Math.random() * 10);
+  }
+
   private updateAIInsight(event: string) {
+    // Update Leaderboard randomly
+    this.leaderboardUsers.forEach(u => u.points += Math.floor(Math.random() * 5));
+    this.leaderboardUsers.sort((a, b) => b.points - a.points);
+
+    // Rotate Questions every few balls
+    const questions = [
+      "Next Ball Outcome?",
+      "Will this over have a 6?",
+      "Who is the next to fall?",
+      "Match winner prediction?"
+    ];
+    if (this.ballsInOver === 0) {
+      this.oracleQuestion = questions[this.overs % questions.length];
+      this.userVote = null; // Reset vote for new question
+    }
+
     const scenarios = [
       `India dominates with ${this.runs}/${this.wickets}. Momentum shifting.`,
       `Critical phase at ${this.overs}.${this.ballsInOver} overs. Tension rising.`,

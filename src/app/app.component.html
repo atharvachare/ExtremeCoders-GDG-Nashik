@@ -431,78 +431,36 @@
       </div>
     </div>
 </section>
-<section class="space-y-3">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-outline" data-icon="record_voice_over">record_voice_over</span>
-<h3 class="font-title-lg text-title-lg text-on-surface">Instant Voiceover</h3>
-</div>
-<div class="bg-white border border-outline-variant rounded-2xl p-4 shadow-sm space-y-4">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 bg-primary-container rounded-full flex items-center justify-center">
-<span class="material-symbols-outlined text-on-primary-container" data-icon="audio_file">audio_file</span>
-</div>
-<div>
-<p class="font-body-md text-body-md font-bold text-on-surface">Reel_VO_DeathOvers.mp3</p>
-<p class="font-label-md text-label-md text-outline">Voice: Professional Male</p>
-</div>
-</div>
-<button class="w-10 h-10 border border-primary text-primary rounded-full flex items-center justify-center active:scale-90 transition-transform">
-<span class="material-symbols-outlined" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
-</button>
-</div>
-<button class="w-full bg-on-surface text-surface py-3 rounded-xl font-title-lg text-title-lg flex items-center justify-center gap-2 active:scale-[0.98] transition-transform">
-<span class="material-symbols-outlined" data-icon="download">download</span> Export MP3 Asset
-</button>
-</div>
-</section>
 </main>
 
-<!-- ORACLE TAB -->
-<main *ngIf="activeTab === 'oracle'" class="flex-grow pt-20 pb-24 px-4 max-w-md mx-auto w-full">
-<section class="mb-gutter bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] border border-outline-variant mb-6">
-<div class="flex items-center justify-between mb-4">
-<h2 class="font-headline-md text-headline-md text-on-surface">Next Ball Outcome?</h2>
-<div class="flex items-center gap-1 text-primary">
-<span class="material-symbols-outlined text-[20px]" data-icon="groups">groups</span>
-<span class="font-label-md text-label-md">14.2K Voting</span>
-</div>
-</div>
-    <div class="space-y-3">
-      <div class="relative group cursor-pointer active:scale-95 transition-transform duration-150">
-        <div class="absolute inset-0 bg-primary/10 rounded-lg z-0" [style.width.%]="oracleProbDot"></div>
-        <div class="relative z-10 flex justify-between items-center p-3 border border-outline-variant rounded-lg bg-transparent">
-          <span class="font-body-md text-body-md font-semibold">Dot Ball</span>
-          <span class="font-data-num text-[16px] text-primary">{{oracleProbDot.toFixed(0)}}%</span>
+<!-- ORACLE TAB -  <!-- ORACLE TAB -->
+  <main *ngIf="activeTab === 'oracle'" class="flex-grow pt-20 pb-24 px-4 max-w-md mx-auto w-full">
+    <section class="mb-gutter bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.06)] border border-outline-variant mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-headline-md text-headline-md text-on-surface">{{oracleQuestion}}</h2>
+        <div class="flex items-center gap-1 text-primary">
+          <span class="material-symbols-outlined text-[20px]" data-icon="groups">groups</span>
+          <span class="font-label-md text-label-md">{{(voteA + voteB).toLocaleString()}} Voting</span>
         </div>
       </div>
-      <div class="relative group cursor-pointer active:scale-95 transition-transform duration-150">
-        <div class="absolute inset-0 bg-primary/10 rounded-lg z-0" [style.width.%]="oracleProbRuns"></div>
-        <div class="relative z-10 flex justify-between items-center p-3 border border-primary rounded-lg bg-transparent">
-          <div class="flex items-center gap-2">
-            <span class="font-body-md text-body-md font-semibold text-primary">1-3 Runs</span>
-            <span class="material-symbols-outlined text-[18px] text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+      <div class="space-y-3">
+        <div *ngFor="let opt of oracleOptions" 
+             (click)="submitVote(opt.id)"
+             [class.border-primary]="userVote === opt.id"
+             class="relative group cursor-pointer active:scale-95 transition-transform duration-150 border border-outline-variant rounded-lg overflow-hidden">
+          <div class="absolute inset-0 bg-primary/10 z-0 transition-all duration-1000" [style.width.%]="opt.prob"></div>
+          <div class="relative z-10 flex justify-between items-center p-3 bg-transparent">
+            <div class="flex items-center gap-2">
+              <span class="font-body-md text-body-md font-semibold" [class.text-primary]="userVote === opt.id">{{opt.label}}</span>
+              <span *ngIf="userVote === opt.id" class="material-symbols-outlined text-[18px] text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            </div>
+            <span class="font-data-num text-[16px]" [class.text-primary]="userVote === opt.id">{{opt.prob.toFixed(0)}}%</span>
           </div>
-          <span class="font-data-num text-[16px] text-primary">{{oracleProbRuns.toFixed(0)}}%</span>
         </div>
       </div>
-      <div class="relative group cursor-pointer active:scale-95 transition-transform duration-150">
-        <div class="absolute inset-0 bg-primary/10 rounded-lg z-0" [style.width.%]="oracleProbBoundary"></div>
-        <div class="relative z-10 flex justify-between items-center p-3 border border-outline-variant rounded-lg bg-transparent">
-          <span class="font-body-md text-body-md font-semibold">Boundary</span>
-          <span class="font-data-num text-[16px] text-primary">{{oracleProbBoundary.toFixed(0)}}%</span>
-        </div>
-      </div>
-      <div class="relative group cursor-pointer active:scale-95 transition-transform duration-150">
-        <div class="absolute inset-0 bg-primary/10 rounded-lg z-0" [style.width.%]="oracleProbWicket"></div>
-        <div class="relative z-10 flex justify-between items-center p-3 border border-outline-variant rounded-lg bg-transparent">
-          <span class="font-body-md text-body-md font-semibold text-error">Wicket</span>
-          <span class="font-data-num text-[16px] text-error">{{oracleProbWicket.toFixed(0)}}%</span>
-        </div>
-      </div>
-    </div>
-<p class="mt-4 text-center text-outline font-label-md text-label-md">Poll closes in 8s</p>
-</section>
+      <p class="mt-4 text-center text-outline font-label-md text-label-md">New question in {{6 - ballsInOver}} balls</p>
+    </section>
+
     <section class="mb-gutter ai-gradient-border rounded-xl p-6 shadow-lg bg-white">
       <div class="flex items-center justify-between mb-2">
         <div class="flex items-center gap-2">
@@ -514,36 +472,26 @@
       <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
         {{oracleAIInsight}}
       </p>
-      <div class="mt-4 flex items-center gap-4">
-        <span class="text-outline font-label-md text-label-md">Trusted by 4.2k Pro Analysts</span>
-      </div>
     </section>
 
-    <!-- Interactive Leaderboard & Social Chatter -->
+    <!-- Dynamic Leaderboard -->
     <section class="grid grid-cols-1 gap-6">
       <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant">
         <h3 class="font-title-lg text-title-lg mb-3 flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">emoji_events</span> Leaderboard</h3>
         <div class="space-y-2">
-          <div class="flex items-center justify-between p-2 bg-white rounded-lg shadow-sm border border-slate-100">
+          <div *ngFor="let user of leaderboardUsers; let i = index" 
+               class="flex items-center justify-between p-2 bg-white rounded-lg shadow-sm border border-slate-100 transition-all duration-500">
             <div class="flex items-center gap-2">
-              <span class="font-bold text-primary w-4">1</span>
-              <div class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold shadow-inner">AK</div>
-              <span class="font-body-sm font-semibold">Aryan K.</span>
+              <span class="font-bold w-4" [class.text-primary]="i === 0" [class.text-outline]="i > 0">{{i + 1}}</span>
+              <div class="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shadow-inner" [ngClass]="user.color">{{user.initials}}</div>
+              <div class="flex flex-col">
+                <span class="font-body-sm font-semibold">{{user.name}}</span>
+                <span class="text-[8px] text-outline">{{user.points}} Points</span>
+              </div>
             </div>
             <div class="flex items-center gap-1 text-orange-500 bg-orange-50 px-2 py-0.5 rounded-full">
               <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
-              <span class="text-[10px] font-bold">{{10 + wickets}} Streak</span>
-            </div>
-          </div>
-          <div class="flex items-center justify-between p-2 bg-white rounded-lg shadow-sm border border-slate-100 opacity-80">
-            <div class="flex items-center gap-2">
-              <span class="font-bold text-outline w-4">2</span>
-              <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shadow-inner">S</div>
-              <span class="font-body-sm font-semibold">Sarah T.</span>
-            </div>
-            <div class="flex items-center gap-1 text-orange-500 bg-orange-50 px-2 py-0.5 rounded-full">
-              <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
-              <span class="text-[10px] font-bold">{{5 + ballsInOver}} Streak</span>
+              <span class="text-[10px] font-bold">{{user.streak}} Streak</span>
             </div>
           </div>
         </div>
@@ -560,8 +508,7 @@
         </div>
       </div>
     </section>
-
-</main>
+  </main>
 
 <nav class="fixed bottom-0 w-full z-50 border-t border-slate-200 rounded-t-xl bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
 <div class="flex justify-around items-center w-full px-2 py-3 h-20">
