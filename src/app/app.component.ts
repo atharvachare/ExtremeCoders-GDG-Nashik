@@ -18,6 +18,8 @@ export class AppComponent {
   oracleProbBoundary: number = 18;
   oracleProbDot: number = 42;
   oracleProbRuns: number = 31;
+  oracleAIInsight: string = "Analyzing past ball patterns to predict next outcome...";
+  socialChatter: string = "@cricket_fan: The match is heating up! 🔥";
   tensionLevel: number = 45;
   winPercentage: number = 62;
   
@@ -186,6 +188,18 @@ export class AppComponent {
     
     this.aiInsight = event || scenarios[Math.floor(Math.random() * scenarios.length)];
     
+    // Oracle AI Prediction
+    this.oracleAIInsight = `Data indicates a ${this.tensionLevel > 60 ? 'volatile' : 'calculated'} period. With the CRR at ${this.runRate}, the predicted probability for a boundary is ${this.oracleProbBoundary.toFixed(1)}%.`;
+
+    // Social Chatter
+    const chatter = [
+      `@cricket_fan: ${this.runs}/${this.wickets} - what a match!`,
+      `@stats_nerd: Run rate is ${this.runRate}, Aus under pressure!`,
+      `@expert: This partnership of ${this.partnershipRuns} is the key.`,
+      `@fan_zone: Tension is at ${(this.tensionLevel/10).toFixed(1)}/10! 🔥`
+    ];
+    this.socialChatter = chatter[Math.floor(Math.random() * chatter.length)];
+
     // Creator Studio Insight
     this.studioInsight = `Current run rate: ${this.runRate}. The partnership is now ${this.partnershipRuns} runs. A prime opportunity for a 'Strategic Analysis' Reel.`;
   }
